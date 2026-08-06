@@ -25,6 +25,7 @@ public partial class ControlBarSendMessage
     public string Text
     {
         set => _message.Text = value;
+        get => _message.Text;
     }
 
     public ControlBarSendMessage()

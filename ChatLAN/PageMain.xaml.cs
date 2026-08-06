@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows;
@@ -15,6 +17,7 @@ public partial class PageMain
     {
         InitializeComponent();
     }
+
 
     private void BtnJoinOnClick(object sender, RoutedEventArgs e)
     {
@@ -62,26 +65,24 @@ public partial class PageMain
 
     private bool ValidationAdress(string text)
     {
-        foreach (var ch in text)
-            if (!(char.IsDigit(ch) | ch == '.'))
-                return false;
+        if (!text.Any(ch => char.IsDigit(ch) || ch == '.'))
+            return false;
 
         var digits = text.Split('.');
-        if (digits.Length != 4) return false;
-        foreach (var s in digits)
-            if (s == string.Empty)
-                return false;
-        return true;
+        return digits.Length == 4 && !digits.Any(d => string.IsNullOrEmpty(d));
     }
 
     private byte[] GetIpAdress(string ipAdress)
     {
         var bytes = new byte[4];
-        byte inc = 0;
+        var inc = 0;
         foreach (var bit in ipAdress.Split('.'))
         {
-            bytes[inc] = byte.Parse(bit);
-            inc++;
+            if (byte.TryParse(bit, out var result))
+            {
+                bytes[inc] = result;
+                inc++;
+            }
         }
 
         return bytes;
@@ -115,5 +116,10 @@ public partial class PageMain
             ProgressRing.Visibility = Visibility.Collapsed;
             PanelOfClient.Visibility = Visibility.Visible;
         }, DispatcherPriority.Normal);
+    }
+
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        this.TbLogin.Text = $"User-{Dns.GetHostName()}";
     }
 }

@@ -2,9 +2,9 @@
 
 namespace ChatLAN.Client.Pages.UserControls;
 
-public partial class ControlMessagRevers
+public partial class ControlReplyMessage
 {
-    public ControlMessagRevers(Message message)
+    public ControlReplyMessage(Message message)
     {
         InitializeComponent();
         Text = message.Text;
@@ -23,5 +23,6 @@ public partial class ControlMessagRevers
     private string Text
     {
         set => TbText.Text = value;
+        get => TbText.Text;
     }
 }

@@ -13,5 +13,6 @@ public partial class Server
     }
 
     public static void PrintText(string text) =>
-        _stackPanel.Dispatcher.Invoke(() => _stackPanel.Children.Add(new TextBox{Text = text}));
+        _stackPanel.Dispatcher.Invoke(() =>
+        _stackPanel.Children.Add(new TextBox{Text = text}));
 }

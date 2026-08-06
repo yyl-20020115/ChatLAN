@@ -125,24 +125,16 @@ public class ClientCore
     }
 }
 
-class HashAdpess
+class HashAdpess(byte[] ipAdress, int port)
 {
-    private readonly byte[] _ipAdress;
-    private readonly int _port;
-
-    public HashAdpess(byte[] ipAdress, int port)
-    {
-        _ipAdress = ipAdress;
-        _port = port;
-    }
+    private readonly byte[] _ipAdress = ipAdress;
+    private readonly int _port = port;
 
     public bool Equals(byte[] ipAdress, int port)
     {
         for (int i = 0; i < 4; i++)
             if (_ipAdress[i] != ipAdress[i])
                 return true;
-        if (_port != port)
-            return true;
-        return false;
+        return _port != port;
     }
 }

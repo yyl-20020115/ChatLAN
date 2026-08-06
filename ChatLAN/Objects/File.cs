@@ -12,12 +12,14 @@ public class File
 
     public void SaveFile()
     {
-        SaveFileDialog saveFileDialog = new SaveFileDialog()
+        var saveFileDialog = new SaveFileDialog()
         {
             FileName = Name
         };
         if (saveFileDialog.ShowDialog().HasValue)
-            using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate))
-                fileStream.Write(Data, 0, Data.Length);
+        {
+            using var fileStream = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate);
+            fileStream.Write(Data, 0, Data.Length);
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ChatLAN.Client.Pages.UserControls;
 
-public partial class ControlMessag
+public partial class ControlMessage
 {
     private File _file;
     private File File
@@ -19,14 +19,16 @@ public partial class ControlMessag
     private string Text
     {
         set => TbText.Text = value;
+        get => TbText.Text;
     }
 
     private string Nick
     {
         set => TbName.Text = value;
+        get => TbName.Text;
     }
 
-    public ControlMessag(Message message)
+    public ControlMessage(Message message)
     {
         InitializeComponent();
         Text = message.Text;

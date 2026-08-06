@@ -40,7 +40,7 @@ public static class Util
         {
             var serializer = new XmlSerializer(typeof(TObject));
             using var memory = new MemoryStream(bytes);
-                o = (TObject) serializer.Deserialize(memory);
+            o = (TObject)serializer.Deserialize(memory);
         }
         catch (InvalidOperationException)
         {
@@ -50,7 +50,7 @@ public static class Util
         return o;
     }
 
-    public enum TypeSoketMessage
+    public enum TypeSoketMessage 
     {
         Message,
         Connect,
@@ -61,7 +61,7 @@ public static class Util
 
     public static byte[] ReadAllByte(FileStream stream)
     {
-        byte[] array = new byte[stream.Length];
+        var array = new byte[stream.Length];
         stream.Read(array, 0, array.Length);
         return array;
     }
@@ -73,7 +73,7 @@ public static class Util
             using var streamOut = new MemoryStream();
             {
                 var streamIn = tcpClient.GetStream();
-                byte[] buffer = new byte[64];
+                var buffer = new byte[64];
                 do
                 {
                     int size = streamIn.Read(buffer, 0, buffer.Length);
@@ -82,7 +82,7 @@ public static class Util
 
                 using var memoryStream =
                     new FileStream($"{Environment.CurrentDirectory}/logRead.xml", FileMode.OpenOrCreate);
-                    memoryStream.Write(streamOut.ToArray(), 0, streamOut.ToArray().Length);
+                memoryStream.Write(streamOut.ToArray(), 0, streamOut.ToArray().Length);
                 return streamOut;
             }
         }
@@ -98,8 +98,10 @@ public static class Util
     public static byte[] ReadAllBytes(string pathToFile)
     {
         if (File.Exists(pathToFile))
-            using (FileStream stream = new FileStream(pathToFile, FileMode.Open))
-                return ReadAllByte(stream);
+        {
+            using var stream = new FileStream(pathToFile, FileMode.Open);
+            return ReadAllByte(stream);
+        }
 
         Error?.Invoke(null, $"文件 {pathToFile} 未被找到 ");
         return null;

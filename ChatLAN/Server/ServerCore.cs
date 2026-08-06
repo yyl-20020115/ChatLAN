@@ -14,10 +14,10 @@ public class ServerCore
     public event EventHandler<String> Error;
     public event EventHandler<Message> MessageReceived;
 
-    private readonly List<string> _listUserName = new List<string>();
+    private readonly List<string> _listUserName = [];
     private readonly List<Message> _listMessage;
     private readonly TcpListener _tcpListener;
-    private readonly Dictionary<string, TcpClient> _tcpClientsOnline = new Dictionary<string, TcpClient>();
+    private readonly Dictionary<string, TcpClient> _tcpClientsOnline = [];
 
     private static ServerCore _serverCore;
 
@@ -50,10 +50,7 @@ public class ServerCore
         _listMessage = Serializer.DeserializeMessage();
     }
 
-    public static ServerCore InicilizeServer(int port)
-    {
-        return _serverCore ?? (_serverCore = new ServerCore(port));
-    }
+    public static ServerCore InicilizeServer(int port) => _serverCore ??= new(port);
 
     private void SendingMessages(Message message)
     {
@@ -128,7 +125,7 @@ public class ServerCore
                 "服务器已启动。等待连接...");
             while (true)
             {
-                TcpClient tcpClient = _tcpListener.AcceptTcpClient();
+                var tcpClient = _tcpListener.AcceptTcpClient();
                 if (ValidationUserName(tcpClient)) continue;
                 AddBadClient(tcpClient);
                 Pages.Server.PrintText("服务器出现错误 ");

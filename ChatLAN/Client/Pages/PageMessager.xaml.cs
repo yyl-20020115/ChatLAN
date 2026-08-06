@@ -12,15 +12,13 @@ public partial class PageMessager
     public PageMessager()
     {
         InitializeComponent();
-        ClientCore clientCore = ClientCore.GetCore();
+        var clientCore = ClientCore.GetCore();
         clientCore.AddMessage += (sender, message) =>
             PanelMessage.Invoke(() =>
             {
-                UserControl element;
-                if (message.Name == ClientCore.NameUser)
-                    element = new ControlMessagRevers(message){Foreground = new SolidColorBrush(Color.FromArgb(255,255,218,187)) };
-                else
-                    element = new ControlMessag(message){Foreground =Foreground = Brushes.LightBlue };
+                var element = message.Name == ClientCore.NameUser
+                    ? new ControlReplyMessage(message){Foreground = new SolidColorBrush(Color.FromArgb(255,255,218,187)) }
+                    : new ControlMessage(message){Foreground =Foreground = Brushes.LightBlue };
                 element.Margin = new Thickness(5);
            
                 PanelMessage.Children.Add(element);

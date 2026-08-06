@@ -39,6 +39,6 @@ public static class Serializer
             return (List<Message>)new XmlSerializer(typeof(List<Message>)).Deserialize(stream);
 
         }
-        return new List<Message>();
+        return [];
     }
 }
