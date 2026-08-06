@@ -48,7 +48,7 @@ public partial class ControlBarSendMessage
 
     private void OpenFile(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog dialog = new OpenFileDialog();
+        var dialog = new OpenFileDialog();
         if (dialog.ShowDialog().HasValue)
             File = dialog.FileName;
     }

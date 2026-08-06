@@ -29,13 +29,13 @@ public class ClientCore
         catch (SocketException)
         {
             _tcpClient = null;
-            Error?.Invoke(null, "Подключение не установлено");
+            Error?.Invoke(null, "连接未建立");
         }
 
         catch (ObjectDisposedException)
         {
             _tcpClient = null;
-            Error?.Invoke(null, "Соединение разорвано");
+            Error?.Invoke(null, "连接已断开");
         }
         finally
         {
@@ -66,7 +66,7 @@ public class ClientCore
 
     public static ClientCore GetCore()
     {
-        if (_client == null) throw new NullReferenceException("Необходимо инициализировать клиент");
+        if (_client == null) throw new NullReferenceException("需要初始化客户端‌");
         return _client;
     }
 
@@ -74,7 +74,7 @@ public class ClientCore
     {
         if (_tcpClient == null)
         {
-            Error?.Invoke(null, "Сервер не найден");
+            Error?.Invoke(null, "服务器未找到");
             _client = null;
             return;
         }
@@ -84,7 +84,7 @@ public class ClientCore
         var k = Util.DeserializeTypeObject<string>(b);
         if (k == null)
         {
-            Error?.Invoke(null, "Что-то пошло не так. \n Попробуйте снова");
+            Error?.Invoke(null, "出了点问题。 \n 请重试");
             return;
         }
 
@@ -94,9 +94,9 @@ public class ClientCore
             NameUser = login;
         }
         else if (Util.TypeSoketMessage.ConflictName == k.TypeSoketMessage)
-            Error?.Invoke(null, "Такое имя занято");
+            Error?.Invoke(null, "这个名字已被占用");
         else
-            Error?.Invoke(null, "Не удалось подключиться");
+            Error?.Invoke(null, "无法连接到服务器");
     }
 
     public static void SendMessage(Message message)

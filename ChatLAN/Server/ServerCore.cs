@@ -120,7 +120,6 @@ public class ServerCore
     }
 
 
-    // прослушивание входящих подключений
     private void Listen()
     {
         try
