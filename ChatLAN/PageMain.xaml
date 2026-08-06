@@ -9,7 +9,7 @@
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <TextBlock HorizontalAlignment="Center">Режим работы</TextBlock>
+            <TextBlock HorizontalAlignment="Center"><Run Language="zh-cn" Text="运行模式"/></TextBlock>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <TextBlock Padding="5" x:Name="TbServer">
                     <TextBlock.Style>
@@ -22,7 +22,7 @@
                             </Style.Triggers>
                         </Style>
                     </TextBlock.Style>
-                    Сервер
+                    服务端
                 </TextBlock>
                 <mah:ToggleSwitchButton Margin="20,0" Name="ToggleSwitchButton"
                                         Style="{StaticResource MahApps.Metro.Styles.ToggleSwitchButton.Win10}" />
@@ -37,10 +37,10 @@
                             </Style.Triggers>
                         </Style>
                     </TextBlock.Style>
-                    Клиент
+                    客户端
                 </TextBlock>
             </StackPanel>
-            <TextBlock>Адрес</TextBlock>
+            <TextBlock>IP地址:</TextBlock>
             <TextBox
                 Name="TbAdress">
                 <TextBox.Style>
@@ -60,7 +60,7 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <TextBlock>Порт</TextBlock>
+            <TextBlock>端口号:</TextBlock>
             <mah:NumericUpDown
                 Name="NumPort"
                 TextAlignment="Left" Value="8888"
@@ -81,7 +81,7 @@
 
                 </StackPanel.Style>
                 <Button Name="BtnStart" Margin="20,9" Click="BtnStart_OnClick">
-                    Запустить
+                    开始
                 </Button>
             </StackPanel>
             <Grid Name="PanelOfClient" Margin="0,0">
@@ -97,9 +97,9 @@
 
                 </Grid.Style>
                 <StackPanel>
-                    <TextBlock>Логин</TextBlock>
-                    <TextBox Name="TbLogin">Login</TextBox>
-                    <Button Margin="20,10" Name="BtnSignIn" Click="BtnJoinOnClick">Авторизироваться</Button>
+                    <TextBlock>用户名:</TextBlock>
+                    <TextBox Name="TbLogin">User</TextBox>
+                    <Button Margin="20,10" Name="BtnSignIn" Click="BtnJoinOnClick">登录</Button>
                 </StackPanel>
             </Grid>
             <mah:ProgressRing Name="ProgressRing" Visibility="Collapsed" Height="42" Width="42" />

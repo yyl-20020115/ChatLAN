@@ -1,7 +1,6 @@
-﻿namespace ChatLAN.Objects
+﻿namespace ChatLAN.Objects;
+
+public static class Const
 {
-    public static class Const
-    {
-        public const string ServerPathToMessage = "/Data/";
-    }
+    public const string ServerPathToMessage = "/Data/";
 }
