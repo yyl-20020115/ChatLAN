@@ -18,8 +18,14 @@ public static class Serializer
 
     public static void SerializeMessage(List<Message> objSerializ)
     {
-        using var stream = new FileStream(Path, FileMode.Create);
+        try
+        {
+            using var stream = new FileStream(Path, FileMode.Create);
             new XmlSerializer(typeof(List<Message>)).Serialize(stream, objSerializ);
+        }
+        catch (Exception ex)
+        {
+        }
     }
 
     public static List<Message> DeserializeMessage()
