@@ -18,13 +18,16 @@ public static class Serializer
 
     public static void SerializeMessage(List<Message> objSerializ)
     {
-        try
+        if (File.Exists(System.IO.Path.GetDirectoryName(Path)))
         {
-            using var stream = new FileStream(Path, FileMode.Create);
-            new XmlSerializer(typeof(List<Message>)).Serialize(stream, objSerializ);
-        }
-        catch (Exception ex)
-        {
+            try
+            {
+                using var stream = new FileStream(Path, FileMode.Create);
+                new XmlSerializer(typeof(List<Message>)).Serialize(stream, objSerializ);
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 
