@@ -16,7 +16,7 @@ public partial class PageMessager
         clientCore.AddMessage += (sender, message) =>
             PanelMessage.Invoke(() =>
             {
-                var element = message.Name == ClientCore.NameUser
+                UserControl element = message.Name == ClientCore.NameUser
                     ? new ControlReplyMessage(message){Foreground = new SolidColorBrush(Color.FromArgb(255,255,218,187)) }
                     : new ControlMessage(message){Foreground =Foreground = Brushes.LightBlue };
                 element.Margin = new Thickness(5);
