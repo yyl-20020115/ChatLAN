@@ -50,7 +50,7 @@ public class ServerCore
         _listMessage = Serializer.DeserializeMessage();
     }
 
-    public static ServerCore InicilizeServer(int port) => _serverCore ??= new(port);
+    public static ServerCore Initialize(int port) => _serverCore ??= new(port);
 
     private void SendingMessages(Message message)
     {

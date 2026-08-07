@@ -55,7 +55,8 @@ public partial class PageMain
 
     private void BtnStart_OnClick(object sender, RoutedEventArgs e)
     {
-        var server = ServerCore.InicilizeServer(int.Parse(NumPort.Value.ToString()));
+        var server = ServerCore.Initialize(
+            int.TryParse(NumPort.Value.ToString(), out var port) ? port : 0);
         server.Error -= MessageOnError;
         server.Error += MessageOnError;
         server.ServerStart -= OpenPageServer;
@@ -75,16 +76,10 @@ public partial class PageMain
     private byte[] GetIpAdress(string ipAdress)
     {
         var bytes = new byte[4];
-        var inc = 0;
-        foreach (var bit in ipAdress.Split('.'))
-        {
-            if (byte.TryParse(bit, out var result))
-            {
-                bytes[inc] = result;
-                inc++;
-            }
-        }
-
+        var i = 0;
+        foreach (var segment in ipAdress.Split('.'))
+            if (byte.TryParse(segment, out var result))
+                bytes[i++] = result;
         return bytes;
     }
 
